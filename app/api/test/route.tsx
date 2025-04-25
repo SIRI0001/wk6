@@ -7,8 +7,10 @@ export async function GET() {
 }
 
 
-export async function POST(req: NextRequest, context: { params: { id: string } }) {
-  const { id } = await req.json();
+export async function POST(req: NextRequest) {
+
+  const url = new URL(req.url);
+  const id = url.pathname.split("/").pop();
 
   if (!id) {
     return NextResponse.json({ error: 'ID is required' }, { status: 400 });

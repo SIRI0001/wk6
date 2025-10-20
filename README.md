@@ -1,6 +1,6 @@
-# A2 Scaffold (Sequelize)
+# A2 Scaffold (Prisma)
 
-Minimal Next.js App Router CRUD using Sequelize + SQLite.
+Minimal Next.js App Router CRUD using Prisma + SQLite.
 
 ## Scripts
 - npm run dev

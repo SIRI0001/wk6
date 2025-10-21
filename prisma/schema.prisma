@@ -1,3 +1,18 @@
 datasource db { provider = "sqlite"; url = env("DATABASE_URL") }
 generator client { provider = "prisma-client-js" }
-model Item { id String @id @default(cuid()); name String; createdAt DateTime @default(now()) }
+
+model Item {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  name String
+  mobile String?
+  email String?
+  notes String?
+  add String?
+}

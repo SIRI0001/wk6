@@ -1,5 +1,4 @@
-import { Item } from "@/models/Item";
-import { randomUUID } from "node:crypto";
+import { prisma } from "@/lib/prisma";
 export const runtime = "nodejs";
-export async function GET(){ await (await import("@/db/index")).sequelize.sync(); const rows = await Item.findAll({ order: [["rowid","DESC"]]}); return Response.json(rows); }
-export async function POST(req: Request){ await (await import("@/db/index")).sequelize.sync(); const { name } = await req.json(); const it = await Item.create({ id: randomUUID(), name }); return Response.json(it, { status: 201 }); }
+export async function GET(){ const items = await prisma.item.findMany({ orderBy: { createdAt: "desc" } }); return Response.json(items); }
+export async function POST(req: Request){ const { name } = await req.json(); const item = await prisma.item.create({ data: { name } }); return Response.json(item, { status: 201 }); }

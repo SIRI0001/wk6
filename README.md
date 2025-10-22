@@ -6,5 +6,3 @@ Minimal Next.js App Router CRUD using Prisma + SQLite.
 - npm run dev
 - npm run build
 - npm start
-
-2025-10-20T10:53:42.770Z - filters

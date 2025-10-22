@@ -1,12 +1,14 @@
-#Stage 1 Build
+version: "3.9"
 services:
-  nextjs-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nextjs-app
+  web:
+    build: .
+    image: myapp-web
     ports:
-     - "80:3000" #maps ec2 80 to docker 3000.
+      - "3000:3000"
     environment:
-     - NODE_ENV=production
-    restart: unless-stopped
+      - NODE_ENV=production
+    volumes:
+      - sqlite:/app/prisma
+
+volumes:
+  sqlite:

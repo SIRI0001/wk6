@@ -1,12 +1,26 @@
-#Stage 1 Build
+version: "3.9"
 services:
-  nextjs-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nextjs-app
+  web:
+    build: .
+    image: myapp-web
     ports:
-     - "80:3000" #maps ec2 80 to docker 3000.
+      - "3000:3000"
     environment:
-     - NODE_ENV=production
-    restart: unless-stopped
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://app:app@db:5432/mydb?schema=public
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
